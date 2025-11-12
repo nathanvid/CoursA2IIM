@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Ordinateur portable",
+        "description": "PC portable 15 pouces, 16GB RAM",
+        "price": 899.99,
+        "stock": 15
+    },
+    {
+        "id": 2,
+        "name": "Souris sans fil",
+        "description": "Souris ergonomique Bluetooth, batterie longue durée",
+        "price": 29.99,
+        "stock": 50
+    },
+    {
+        "id": 3,
+        "name": "Clavier mécanique",
+        "description": "Clavier mécanique RGB, switches Cherry MX",
+        "price": 149.99,
+        "stock": 8
+    }
+]
