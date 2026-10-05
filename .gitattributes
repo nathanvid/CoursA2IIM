@@ -1,0 +1,4 @@
+# Fins de ligne normalisées (LF) pour que le dépôt soit identique sous Windows, macOS et Linux
+* text=auto eol=lf
+*.png binary
+*.jpg binary

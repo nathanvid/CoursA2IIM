@@ -1,0 +1,41 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Installer uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Installer les dépendances
+        run: uv sync --locked
+
+      - name: Lancer les tests
+        run: uv run pytest -v
+
+      # Vérifie que la commande du README démarre bien le serveur
+      - name: Démarrer le serveur et appeler l'API
+        shell: bash
+        run: |
+          uv run uvicorn backend.main:app --port 8000 &
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:8000/products && exit 0
+            sleep 1
+          done
+          echo "Le serveur n'a pas répondu" && exit 1
